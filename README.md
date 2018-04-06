@@ -24,9 +24,21 @@ Authorization
 Rating
 Validation
 
+## Wireframes
+
+<img src="https://github.com/ktso11/ArtsyBiz/blob/master/wireframe/1.jpg" width="300" height="375"/>
+
+<img src="https://github.com/ktso11/ArtsyBiz/blob/master/wireframe/2.jpg" width="300" height="375"/>
+
+<img src="https://github.com/ktso11/ArtsyBiz/blob/master/wireframe/3.jpg" width="300" height="375"/>
+
+<img src="https://github.com/ktso11/ArtsyBiz/blob/master/wireframe/4.jpg" width="300" height="375"/>
+
+<img src="https://github.com/ktso11/ArtsyBiz/blob/master/wireframe/5.jpg" width="300" height="375"/>
+
+<img src="https://github.com/ktso11/ArtsyBiz/blob/master/wireframe/6.jpg" width="300" height="375"/>
 
 
-![picture](https://github.com/ktso11/ArtsyBiz/blob/master/wireframe/1.jpg)
 
 
 
