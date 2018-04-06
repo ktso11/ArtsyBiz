@@ -1,7 +1,7 @@
 # ArtsyBiz
 URL: TBD || 
 Name: “ArtsyBiz" ||
-Genre: Services/Arts ||
+Genre: Services/Arts 
 
 Audience: 
 1. Project Planners/Wedding Planners on a budget seeking amateur talents or just looking for local vendors. 
@@ -10,8 +10,11 @@ Description:  The ArtsyBiz app will allow users to search and contract artsy ven
 
 ## Data Model ERD
 User: email, password, name
+
 Vendor: email, password, name, serviceType, picture, location, cost, url
+
 Orders: user_id, vendor_id, rating
+
 ERD: Users can have many Orders && Vendors can have many Orders
 
 ## MVP
@@ -20,3 +23,10 @@ Vendor Login
 Authorization
 Rating
 Validation
+
+
+
+
+
+
+
