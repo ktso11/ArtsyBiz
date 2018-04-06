@@ -1,7 +1,8 @@
 # ArtsyBiz
-URL: TBD
-Name: “ArtsyBiz"
-Genre: Services/Arts
+URL: TBD || 
+Name: “ArtsyBiz" ||
+Genre: Services/Arts ||
+
 Audience: 
 1. Project Planners/Wedding Planners on a budget seeking amateur talents or just looking for local vendors. 
 2. Vendors (known as Artsy) looking for work or just trying to expand their portfolio
@@ -13,7 +14,7 @@ Vendor: email, password, name, serviceType, picture, location, cost, url
 Orders: user_id, vendor_id, rating
 ERD: Users can have many Orders && Vendors can have many Orders
 
-##MVP
+## MVP
 User login
 Vendor Login
 Authorization
