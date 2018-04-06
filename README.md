@@ -26,7 +26,7 @@ Validation
 
 
 
-
+![picture](https://github.com/ktso11/ArtsyBiz/blob/master/wireframe/1.jpg)
 
 
 
