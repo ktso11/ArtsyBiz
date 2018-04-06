@@ -1,7 +1,11 @@
 # ArtsyBiz
-URL: TBD || 
-Name: “ArtsyBiz" ||
+URL: TBD 
+
+Name: “ArtsyBiz" 
+
 Genre: Services/Arts 
+
+By: Katie So 
 
 Audience: 
 1. Project Planners/Wedding Planners on a budget seeking amateur talents or just looking for local vendors. 
