@@ -23,9 +23,13 @@ ERD: Users can have many Orders && Vendors can have many Orders
 
 ## MVP
 User login
+
 Vendor Login
+
 Authorization
+
 Rating
+
 Validation
 
 ## Wireframes
