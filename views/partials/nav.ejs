@@ -1,0 +1,10 @@
+<div id="nav">
+  Hello
+<% if(!user) { %>
+  <a href="/userlogin">Log in</a>
+  <a href="/usersignup">Sign up</a>
+<% } else { %>
+  <div>Welcome, <%= user.username %>!</div>
+  <a href="/logout">Log out</a>
+<% } %>
+</div>
