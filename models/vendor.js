@@ -3,13 +3,10 @@ var mongoose = require('mongoose'),
     passportLocalMongoose = require('passport-local-mongoose');
 
 var VendorSchema = new Schema({
-  username: String,
-  password: String,
-  name: String,
-  artist: String,
-  location: String,
-  rate: String,
-  picture: String
+  user_id: string {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User'
+        }
 });
 
 VendorSchema.plugin(passportLocalMongoose);

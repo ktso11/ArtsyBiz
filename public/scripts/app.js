@@ -8,6 +8,7 @@ console.log("Sanity Check: JS is working!");
     $('#vendorresults').empty()
     var artist = document.getElementById('artistType').value;
     var location = document.getElementById('artistlocation').value;
+    var user = document.getElementById('currentUser').value;
     $.ajax({
       method: 'GET',
       url: '/api/isvendor?artist='+artist,
@@ -23,8 +24,12 @@ console.log("Sanity Check: JS is working!");
               <p>Rate: ${json[i].rate} per event</p>
               <p>Contact Me: ${json[i].email} </p>
               <p>I am a 5 star Artist, specialized in ${json[i].artist}</p>
+              <form method="POST" id="addOrder" action="/api/orders">
+                <input type="text" id="vendor_id" name="vendor_id" value="${json[i]._id}" >
+                <input type="text" id="user_id" name="user_id" value="${user}" >
+                <input type="submit" value="Hire">
+            </form>
             </section>
-            <span>Hire this Artsy person!</span>
             </div>
             `);
         }
@@ -33,8 +38,27 @@ console.log("Sanity Check: JS is working!");
         console.log("ERROR!", err)
       }
     });
-
   });
+
+  $('addOrder').on('submit', function(e) {
+      e.preventDefault();
+      $.ajax({
+        method: 'POST',
+        url: '/api/orders',
+        data: $(this).serializeArray(),
+        success: newOrderSuccess,
+        error: function(err){
+          console.log("ERROR!", err)
+        }
+      })
+  })
+
+  function newOrderSuccess(json) {
+    $('#user_id input').val('');
+    $('#vendor_id input').val('');
+    newOrder.push(json);
+    console.log(json)
+  }
 
 
 })

@@ -7,7 +7,7 @@ var express = require("express"),
     LocalStrategy = require('passport-local').Strategy;
 var db = require("./models"),
     User = db.User
-    Rating = db.Rating
+    Order = db.Order
 // Configure app
 app.set("views", __dirname + '/views');    // Views directory
 app.use(express.static('public'));          // Static directory
@@ -48,6 +48,39 @@ app.get('/vendorlog', function(req, res) {
 app.get('/search', function(req, res) {
  res.render("search", { user: req.user });
 });
+app.get('/profile', function(req, res) {
+ res.render("profile", { user: req.user });
+});
+
+app.get('/api/orders', function(req, res) {
+  db.Order.find({}, function(err, order) {
+    if (err) { cosole.error("Order not found")}
+    res.json(order)
+  })
+})
+//Create Orders
+app.post('/api/orders', function (req, res) {
+  console.log("Order request: " + req.body.user_id);
+  db.User.findOne({_id: req.body.user_id}, function(err, userfound){
+    if (err){
+      console.error('not a real user!')
+      res.status(400).json({error: "User not found."})
+    }
+    console.log('Found user:' + userfound)
+    db.Order.create({
+      rater_user: req.body.user_id,
+      rated_vendor: req.body.vendor_id
+    }, function(err, order) {
+      if (err) {
+        console.error("Error saving order.");
+        res.status(400).json({error: err})
+      } else {
+        console.log(order);
+        res.status(200).json(order);
+      }
+    });
+  })
+})
 
 //GET Vendors
 app.get('/api/vendors', function(req, res) {
@@ -85,6 +118,9 @@ app.post('/partials/vendorsignup', function (req, res) {
     email: req.body.email,
  }), req.body.password,
     function (err, newVendor) {
+      // Vendor.create({
+      //   user_id: newVendor._id
+      // })
       passport.authenticate('local')(req, res, function() {
       res.redirect('/search');;
       });
@@ -113,8 +149,7 @@ app.get('/partials/userlogin', function (req, res) {
 
 app.post('/partials/userlogin', passport.authenticate('local'), function (req, res) {
   console.log(req.user);
-  res.redirect('/search'); // sanity check
-  // res.redirect('/'); // preferred!
+  res.redirect('/search');
 });
 
 app.get('/logout', function (req, res) {
