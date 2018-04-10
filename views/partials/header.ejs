@@ -1,0 +1,19 @@
+<header>
+
+  <h1>ArtsyBiz</h1>
+  <% if(!user) { %>
+  <div id="userTrue">
+    <span id="loginNav">
+      <a href="/userlog">Planner</a>
+      <a href="/vendorlog">Artist</a>
+    </span>
+  </div>
+  <% } else { %>
+    <!-- <div>Welcome, <%= user.username %>!</div> -->
+    <div id="userTrue">
+      <span id="loginNav">
+        <a href="/logout">Log out</a>
+      </span>
+    </div>
+  <% } %>
+</header>

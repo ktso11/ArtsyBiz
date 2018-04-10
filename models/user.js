@@ -10,7 +10,9 @@ var UserSchema = new Schema({
   artist: String,
   location: String,
   rate: String,
-  picture: String
+  picture: String,
+  email: String
+
 });
 
 UserSchema.plugin(passportLocalMongoose);

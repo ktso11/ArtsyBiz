@@ -7,7 +7,7 @@ var express = require("express"),
     LocalStrategy = require('passport-local').Strategy;
 var db = require("./models"),
     User = db.User
-    Vendor = db.Vendor
+    Rating = db.Rating
 // Configure app
 app.set("views", __dirname + '/views');    // Views directory
 app.use(express.static('public'));          // Static directory
@@ -46,30 +46,52 @@ app.get('/vendorlog', function(req, res) {
  res.render("vendorlog", { user: req.user, });
 });
 app.get('/search', function(req, res) {
- res.render("search", { user: req.user, vendor: req.vendor, name: req.user.name });
+ res.render("search", { user: req.user });
 });
+
+//GET Vendors
+app.get('/api/vendors', function(req, res) {
+  db.User.find().populate('')
+  .exec(function(err, vendorlist) {
+    if (err) { return console.log("index error: " + err); }
+    res.json(vendorlist);
+  });
+})
+
+app.get('/api/isvendor', function(req, res) {
+  query = req.query.artist
+  lquery = req.query.location
+  db.User.find({isVendor: true, artist: query})
+  .populate('')
+  .exec(function (err, vendor) {
+      res.json(vendor);
+  });
+})
+
+
 //vendor signup
 app.get('/partials/vendorsignup', function (req, res) {
  res.render('/partials/vendorsignup');
 });
 app.post('/partials/vendorsignup', function (req, res) {
-  User.register(new User({ username: req.body.username, name: req.body.name, isVendor: req.body.isVendor }), req.body.password,
+  User.register(new User({
+    username: req.body.username,
+    name: req.body.name,
+    isVendor: req.body.isVendor,
+    artist: req.body.artist,
+    location: req.body.location,
+    rate: req.body.rate,
+    picture: req.body.picture,
+    email: req.body.email,
+ }), req.body.password,
     function (err, newVendor) {
       passport.authenticate('local')(req, res, function() {
-      res.redirect('/');;
+      res.redirect('/search');;
       });
     }
   );
 });
-app.get('/partials/vendorlogin', function (req, res) {
- res.render('/partials/vendorlogin');
-});
 
-app.post('/partials/vendorlogin', passport.authenticate('local'), function (req, res) {
-  console.log(req.user);
-  res.redirect('/search'); // sanity check
-  // res.redirect('/'); // preferred!
-});
 //user signup
 app.get('/partials/usersignup', function (req, res) {
  res.render('/partials/usersignup');

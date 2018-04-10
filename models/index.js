@@ -5,4 +5,4 @@ mongoose.Promise = global.Promise;
 
 
 module.exports.User = require("./user.js");
-module.exports.Vendor = require("./vendor.js")
+module.exports.Rating = require("./rating.js")
