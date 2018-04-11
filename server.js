@@ -7,6 +7,7 @@ var express = require("express"),
     LocalStrategy = require('passport-local').Strategy;
 var db = require("./models"),
     User = db.User
+    Order = db.Order
     Vendor = db.Vendor
 // Configure app
 app.set("views", __dirname + '/views');    // Views directory
@@ -46,30 +47,130 @@ app.get('/vendorlog', function(req, res) {
  res.render("vendorlog", { user: req.user, });
 });
 app.get('/search', function(req, res) {
- res.render("search", { user: req.user, vendor: req.vendor, name: req.user.name });
+ res.render("search", { user: req.user });
 });
+app.get('/profile', function(req, res) {
+ res.render("profile", { user: req.user });
+});
+
+
+
+app.get('/api/order', function(req, res) {
+  db.Order.find({}, function(err, order) {
+    if (err) { cosole.error("Order not found")}
+    res.json(order)
+  })
+})
+
+//api/user:id/orders
+app.get('/api/userorder', function(req, res) {
+  db.Order.find({rater_user: req.user._id},
+    function(err, orderlist) {
+    if (err) {
+      console.error("user not found")
+  } else {
+    console.log('this user is found on order list' + orderlist)
+    res.json(orderlist);
+
+    db.User.find(
+      {
+      _id: orderlist.rated_vendor
+    },
+    function(err, order){
+      if (err) {
+        console.error('error creating api');
+      } else {
+        console.log('finding vendor succss')
+        res.status(200).json(order);
+      }
+      }
+    )
+    }
+  })
+})
+
+
+
+//Create Orders
+app.post('/api/orders', function (req, res) {
+  console.log("Order request: " + req.body.user_id);
+  db.Vendor.findOne({user_id: req.body.vendor_id}, function(err, userfound){
+    if (err){
+      console.error('not a real user!')
+      res.status(400).json({error: "User not found."})
+    } else {
+      console.log('Found user:' + userfound)
+      db.Order.create({
+        rater_user: req.body.user_id,
+        rated_vendor: userfound._id
+      }, function(err, order) {
+        if (err) {
+          console.error("Error saving order.");
+          res.status(400).json({error: err})
+        } else {
+          console.log(order);
+          res.status(200).json(order);
+        }
+      });
+    }
+  })
+})
+
+//GET Vendors
+app.get('/api/vendors', function(req, res) {
+  db.Vendor.find().populate('')
+  .exec(function(err, vendorlist) {
+    if (err) { return console.log("index error: " + err); }
+    res.json(vendorlist);
+  });
+})
+
+app.get('/api/isvendor', function(req, res) {
+  query = req.query.artist
+  // lquery = req.query.location
+  db.User.find({isVendor: true, artist: query})
+  .populate('')
+  .exec(function (err, vendor) {
+      res.json(vendor);
+  });
+})
+
+
 //vendor signup
 app.get('/partials/vendorsignup', function (req, res) {
  res.render('/partials/vendorsignup');
 });
 app.post('/partials/vendorsignup', function (req, res) {
-  User.register(new User({ username: req.body.username, name: req.body.name, isVendor: req.body.isVendor }), req.body.password,
+  User.register(new User({
+    username: req.body.username,
+    name: req.body.name,
+    isVendor: req.body.isVendor,
+    artist: req.body.artist,
+    location: req.body.location,
+    rate: req.body.rate,
+    picture: req.body.picture,
+    email: req.body.email,
+ }), req.body.password,
+ //creating a vendor_id
     function (err, newVendor) {
+      Vendor.create({
+        user_id: newVendor._id
+        // username: newVendor.username,
+        // name: newVendor.name,
+        // artist: newVendor.artist,
+        // location: newVendor.location,
+        // rate: newVendor.rate,
+        // picture: newVendor.picture,
+        // email: newVendor.email,
+      })
+      console.log("created")
       passport.authenticate('local')(req, res, function() {
-      res.redirect('/');;
+      res.redirect('/search');;
       });
     }
   );
 });
-app.get('/partials/vendorlogin', function (req, res) {
- res.render('/partials/vendorlogin');
-});
 
-app.post('/partials/vendorlogin', passport.authenticate('local'), function (req, res) {
-  console.log(req.user);
-  res.redirect('/search'); // sanity check
-  // res.redirect('/'); // preferred!
-});
 //user signup
 app.get('/partials/usersignup', function (req, res) {
  res.render('/partials/usersignup');
@@ -91,8 +192,7 @@ app.get('/partials/userlogin', function (req, res) {
 
 app.post('/partials/userlogin', passport.authenticate('local'), function (req, res) {
   console.log(req.user);
-  res.redirect('/search'); // sanity check
-  // res.redirect('/'); // preferred!
+  res.redirect('/search');
 });
 
 app.get('/logout', function (req, res) {

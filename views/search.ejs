@@ -2,21 +2,32 @@
 <html lang="en">
 <% include ../views/partials/head %>
 <body>
-  <header>
-    <h1>artsybiz</h1>
-  </header>
+    <% include ../views/partials/header %>
 
   <main>
-    <% if(!user) { %>
-      <p>you should not be here! Not logged in!</p>
-    <% } else { %>
-      <div>Welcome, <%= user.username %>!   <a href="/logout">Log out</a></div>
-    <% } %>
+
+<div class="vendorsearch">
+  <h3>I am looking for...</h3>
+  <form id="vendorsearch" >
+    <select name="artsy" id="artistType" class="form-control" placeholder="I am looking for ">
+      <option value="Make-Up">Make-Up Artist</option>
+      <option value="HairStylist">HairStylist</option>
+      <option value="DJ">DJ</option>
+    </select>
+    <select name="artistlocation" id="artistlocation" class="form-control" placeholder="I am looking for ">
+      <option value="San Francisco">San Francisco CA</option>
+      <option value="Oakland">Oakland CA</option>
+    </select>
+    <input id="search" type="submit" value="submit">
+  </form>
+</div>
+
+<div id="vendorresults"></div>
   </main>
 
 
 
-  <footer>this is the footer
-  </footer>
+  <% include ../views/partials/footer %>
+
 </body>
 </html>

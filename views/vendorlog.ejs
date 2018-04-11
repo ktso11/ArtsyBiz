@@ -2,20 +2,20 @@
 <html lang="en">
 <% include ../views/partials/head %>
 <body>
-  <header>
-    <h1>artsybiz</h1>
-  </header>
-
+  <% include ../views/partials/header %>
 
   <main>
-    <h2>Vendor login</h2>
-    <div id="userchoose">
-<% include ../views/partials/vendorlogin %>
-<% include ../views/partials/vendorsignup %>
-    </div>
-  </main>
+    <h2><center>Artsy Login</center></h2>
+    <div id="userlogin">
+      <div class="logincontainer">
+        <% include ../views/partials/userlogin %>
+      </div>
+      <div class="logincontainer">
+        <% include ../views/partials/vendorsignup %>
+      </div>
+    </main>
 
-  <footer>this is the footer
-  </footer>
+  <% include ../views/partials/footer %>
+
 </body>
 </html>

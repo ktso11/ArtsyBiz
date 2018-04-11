@@ -2,21 +2,34 @@
 <html lang="en">
 <% include ../views/partials/head %>
 <body>
-  <header>
-    <h1>artsybiz</h1>
-  </header>
-  <nav>
-    <% include ../views/partials/nav %>
-  </nav>
+<div id="top">
+      <% include ../views/partials/header2 %>
+  <div id="someinfo">
 
+
+    <div></div>
+    <p id="connectingyou">&ldquo;Connecting you to local artist so you can stay on budget and focus on planning the event of your dreams... &rdquo;</p>
+    <div></div>
+  </div>
+</div>
   <main>
+    <p id="iam">I am a...</p>
     <div id="userchoose">
-      <section class="userVender">I am a <a href="/userlog">Planner</a></div>
-      <section class="userVender">I am an <a href="/vendorlog">Artist</a></div>
+      <section class="userVender">
+        <div id="planner"><span class="userLink"><a href="/userlog">Planner</a></span></div>
+        <div id="description">I am planning a event or a wedding, and I am looking for creative professionals in the area.</div>
+      </section>
+      <section class="userVender">
+        <div id="artist"><span class="userLink"><a href="/vendorlog">Artist</a></span></div>
+        <div id="description">I am an exordinary talent, I am building my brand, and looking for ways to expand my experience.</div>
+      </section>
     </div>
   </main>
 
-  <footer>this is the footer
-  </footer>
+    <div id="testimon">
+      <p>&ldquo;We connect you to local artist so you can stay on budget and focus on planning the event of your dreams... &rdquo;</p>
+
+    </div>
+<% include ../views/partials/footer %>
 </body>
 </html>
