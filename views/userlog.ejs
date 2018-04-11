@@ -6,13 +6,15 @@
 
 
   <main>
-    <div id="userchoose">
-<% include ../views/partials/userlogin %>
-<% include ../views/partials/usersignup %>
+    <div id="userlogin">
+      <div class="logincontainer">
+        <% include ../views/partials/userlogin %>
+      </div>
+      <div class="logincontainer">
+        <% include ../views/partials/usersignup %>
+      </div>
     </div>
   </main>
-
-  <footer>this is the footer
-  </footer>
+  <% include ../views/partials/footer %>
 </body>
 </html>

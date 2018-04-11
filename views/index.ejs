@@ -2,15 +2,18 @@
 <html lang="en">
 <% include ../views/partials/head %>
 <body>
-  <% include ../views/partials/header %>
-  <nav>
-  <!-- <% include ../views/partials/nav %> -->
-  </nav>
+<div id="top">
+      <% include ../views/partials/header2 %>
   <div id="someinfo">
-    <p id="connectingyou">&ldquo;We connect you to local artist so you can stay on budget and focus on planning the event of your dreams... &rdquo;</p>
+
+
+    <div></div>
+    <p id="connectingyou">&ldquo;Connecting you to local artist so you can stay on budget and focus on planning the event of your dreams... &rdquo;</p>
+    <div></div>
   </div>
+</div>
   <main>
-    <h2>I am a...</h2>
+    <p id="iam">I am a...</p>
     <div id="userchoose">
       <section class="userVender">
         <div id="planner"><span class="userLink"><a href="/userlog">Planner</a></span></div>
@@ -18,12 +21,15 @@
       </section>
       <section class="userVender">
         <div id="artist"><span class="userLink"><a href="/vendorlog">Artist</a></span></div>
-        <div id="description">I am an exordinary talent, I am creating my brand, and looking for ways to expand my experience.</div>
+        <div id="description">I am an exordinary talent, I am building my brand, and looking for ways to expand my experience.</div>
       </section>
     </div>
   </main>
 
-  <footer>this is the footer
-  </footer>
+    <div id="testimon">
+      <p>&ldquo;We connect you to local artist so you can stay on budget and focus on planning the event of your dreams... &rdquo;</p>
+
+    </div>
+<% include ../views/partials/footer %>
 </body>
 </html>

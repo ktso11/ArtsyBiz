@@ -1,0 +1,24 @@
+<header>
+
+  <p id="logo">ArtsyBiz</p>
+  <% if(!user) { %>
+  <div id="userTrue">
+    <span id="loginNav">
+      <a href="/userlog">Planner</a>
+      <a href="/vendorlog">Artist</a>
+    </span>
+  </div>
+
+  <% } else { %>
+
+    <div id="userTrue">
+      <span id="loginNav">
+        <a href="/search">Search</a>
+        <a href="/profile" id="profile">Profile</a>
+        <a href="/logout">Log out</a>
+        <input type="hidden" id="currentUser" value="<%= user._id %>">
+
+      </span>
+    </div>
+  <% } %>
+</header>

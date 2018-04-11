@@ -8,6 +8,7 @@ var express = require("express"),
 var db = require("./models"),
     User = db.User
     Order = db.Order
+    Vendor = db.Vendor
 // Configure app
 app.set("views", __dirname + '/views');    // Views directory
 app.use(express.static('public'));          // Static directory
@@ -52,39 +53,68 @@ app.get('/profile', function(req, res) {
  res.render("profile", { user: req.user });
 });
 
-app.get('/api/orders', function(req, res) {
+
+
+app.get('/api/order', function(req, res) {
   db.Order.find({}, function(err, order) {
     if (err) { cosole.error("Order not found")}
     res.json(order)
   })
 })
+
+//api/user:id/orders
+app.get('/api/userorder', function(req, res) {
+  db.Order.find({rater_user: req.user._id},
+    function(err, orderlist) {
+    if (err) {
+      console.error("user not found")
+  } else {
+    console.log('this user is found on order list' + orderlist)
+
+    db.User.find({
+      _id: orderlist.rated_vendor
+    }, function(err, order){
+      if (err) {
+        console.error('error creating api');
+      } else {
+        console.log('finding vendor succss')
+        res.status(200).json(order);
+      }
+      }
+    )
+    }
+  })
+})
+
 //Create Orders
 app.post('/api/orders', function (req, res) {
   console.log("Order request: " + req.body.user_id);
-  db.User.findOne({_id: req.body.user_id}, function(err, userfound){
+  db.Vendor.findOne({user_id: req.body.vendor_id}, function(err, userfound){
     if (err){
       console.error('not a real user!')
       res.status(400).json({error: "User not found."})
+    } else {
+      console.log('Found user:' + userfound)
+      db.Order.create({
+        rater_user: req.body.user_id,
+        rated_vendor: userfound._id
+      }, function(err, order) {
+        if (err) {
+          console.error("Error saving order.");
+          res.status(400).json({error: err})
+        } else {
+          console.log(order);
+          res.status(200).json(order);
+        }
+      });
     }
-    console.log('Found user:' + userfound)
-    db.Order.create({
-      rater_user: req.body.user_id,
-      rated_vendor: req.body.vendor_id
-    }, function(err, order) {
-      if (err) {
-        console.error("Error saving order.");
-        res.status(400).json({error: err})
-      } else {
-        console.log(order);
-        res.status(200).json(order);
-      }
-    });
+
   })
 })
 
 //GET Vendors
 app.get('/api/vendors', function(req, res) {
-  db.User.find().populate('')
+  db.Vendor.find().populate('')
   .exec(function(err, vendorlist) {
     if (err) { return console.log("index error: " + err); }
     res.json(vendorlist);
@@ -93,7 +123,7 @@ app.get('/api/vendors', function(req, res) {
 
 app.get('/api/isvendor', function(req, res) {
   query = req.query.artist
-  lquery = req.query.location
+  // lquery = req.query.location
   db.User.find({isVendor: true, artist: query})
   .populate('')
   .exec(function (err, vendor) {
@@ -117,10 +147,12 @@ app.post('/partials/vendorsignup', function (req, res) {
     picture: req.body.picture,
     email: req.body.email,
  }), req.body.password,
+ //creating a vendor_id
     function (err, newVendor) {
-      // Vendor.create({
-      //   user_id: newVendor._id
-      // })
+      Vendor.create({
+        user_id: newVendor._id
+      })
+      console.log("created")
       passport.authenticate('local')(req, res, function() {
       res.redirect('/search');;
       });

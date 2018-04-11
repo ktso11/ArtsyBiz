@@ -9,10 +9,11 @@
 
   <p>Hello <%= user.name%>, what would you like to do?</p>
 
-  <p> Rate my Artsy: <p>
+  <input id="rate" type="submit" value=" Rate my Artsy">
+    <div id="hidden_rate"></div>
     <div id="rateArtsy"></div>
 
-  <footer>this is the footer
-  </footer>
+    <% include ../views/partials/footer %>
+
 </body>
 </html>

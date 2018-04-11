@@ -1,6 +1,6 @@
-<header>
+<header id="header2">
 
-  <h1>ArtsyBiz</h1>
+  <p id="logo">ArtsyBiz</p>
   <% if(!user) { %>
   <div id="userTrue">
     <span id="loginNav">
@@ -13,6 +13,8 @@
 
     <div id="userTrue">
       <span id="loginNav">
+        <a href="/search">Search</a>
+        <a href="/profile" id="profile">Profile</a>
         <a href="/logout">Log out</a>
         <input type="hidden" id="currentUser" value="<%= user._id %>">
 

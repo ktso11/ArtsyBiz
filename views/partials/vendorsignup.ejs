@@ -1,47 +1,28 @@
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+  <div class="formcontainer">
+
         <h2>Sign Up</h2>
         <br>
-        <form method="POST" action="partials/vendorsignup">
-          <div class="form-group">
-            <input type="text" name="name" class="form-control" placeholder="Your Name">
-          </div>
-          <div class="form-group">
-            <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
-          </div>
-          <div class="form-group">
-            <input type="text" name="email" class="form-control" placeholder="Email" autofocus>
-          </div>
-          <div class="form-group">
-            <input type="password" name="password" class="form-control" placeholder="Password">
+        <form method="POST" class="formstyle" action="partials/vendorsignup">
+            <input type="text" name="name" placeholder="Your Name">
+            <input type="text" name="username" placeholder="Username" autofocus>
+            <input type="text" name="email" placeholder="Email" autofocus>
+            <input type="password" name="password" placeholder="Password">
             <input type="hidden" name="isVendor" value="true"/>
-          </div>
-          <div class="form-group">
-            <select name="artist" class="form-control" placeholder="Hairstylist">
+            <select name="artist" placeholder="Hairstylist">
+              <option value="" disabled selected>Select your artistry</option>
               <option value="Make-Up">Make-Up Artist</option>
               <option value="HairStylist">HairStylist</option>
               <option value="DJ">DJ</option>
             </select>
-          </div>
-          <div class="form-group">
-            <select name="location" class="form-control" placeholder="San Francisco CA">
+            <select name="location" placeholder="Location">
+              <option value="" disabled selected>Location</option>
               <option value="San Francisco">San Francisco CA</option>
               <option value="Oakland">Oakland CA</option>
             </select>
-          </div>
-          <div class="form-group">
-            <input type="text" name="rate" class="form-control" placeholder="Rate: $500 per event" autofocus>
-          </div>
-          <div class="form-group">
-            <input type="text" name="picture" class="form-control" placeholder="picture" value="images/person.png" autofocus>
-          </div>
+            <input type="text" name="rate" placeholder="Rate: $500 per event" autofocus>
+            <input type="text" name="picture" placeholder="picture" value="images/person.png" autofocus>
 
-          <div class="form-group">
-            <input type="submit" class="btn btn-block btn-primary" value="Sign Up">
-          </div>
+            <input type="submit"  value="Sign Up">
         </form>
-      </div>
-    </div>
   </div>

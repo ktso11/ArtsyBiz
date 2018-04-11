@@ -1,25 +1,21 @@
 
 *,* :before, *:after {
  box-sizing: border-box;
+ /* text-shadow: .01em .01em .01em black; */
 }
 body {
   margin: 0 auto;
   /* background-color: #DEDCB5;*/
-  background-color:#3E3D5A;
+  /* background-color:#3E3D5A; */
 }
 
 p{
-color: white;
+color: #4C4C4C;
 }
 /* HEADER */
-h2{
-  color: white;
-  padding-left: 5em;
-}
-
 header {
   height: 5em;
-  background-color: #DE5E61;
+  /* background-color: #DE5E61; */
   margin-top: 0em;
   padding-left: 2em;
   display: flex;
@@ -27,15 +23,25 @@ header {
   justify-content: space-between;
   width: 100%;
 }
+#header2 {
+  background-color: black;
+}
+#logo{
+  font-size: 4em;
+  font-weight: 800;
+  color: white;
+  text-shadow: .03em .03em .03em black;
+}
 #loginNav{
   display: inline-block;
   margin-right: 1.61em;
   margin-top: 1.61em;
   margin-left: 1.61em;
+  text-shadow: .03em .03em .03em black;
 }
 #loginNav a{
   border: .2em solid white;
-  border-radius: .5em;
+  border-radius: .2em;
   color: white;
   padding: .3em .3em;
   font-weight: 800;
@@ -50,24 +56,162 @@ h1{
   font-weight: 800;
 }
 
+/* login page*/
+.formstyle{
+  display: flex;
+  flex-direction: column;
+}
+#userlogin{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* display: flex;
+  flex-direction: column; */
+}
+.logincontainer{
+  width: 60%;
+  border-radius: .3em;
+  border: .1em solid #666666;
+  padding: 1em 1em;
+  margin: 1.61em 1.61em;
+}
+.logincontainer input{
+  width: 100%;
+  overflow: auto;
+  border: .1em solid #666666;
+  border-radius: .3em;
+  margin-bottom: .7em;
+}
+.logincontainer select{
+  width: 100%;
+  overflow: auto;
+  border: .1em solid #666666;
+  border-radius: .3em;
+  margin-bottom: .7em;
+}
+.formcontainer h2{
+  margin-bottom: 0em;
+}
+/* Query Initi */
+#vendorsearch select, #vendorsearch input{
+    width: 100%;
+    overflow: auto;
+    border: .1em solid #666666;
+    border-radius: .3em;
+    margin-bottom: .7em;
+}
+#vendorsearch{
+  width: 60%;
+  border-radius: .3em;
+  border: .1em solid #666666;
+  padding: 1em 1em;
+  margin-top: 1.61em;
+  margin-bottom: 4em;
+}
+.vendorsearch{
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+}
+.vendorsearch h3{
+  display: block;
+  margin-bottom: 0em;
+  text-align: left;
+}
+/* Query Results */
+#vendorresults{
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#artistWrap{
+  display: flex;
+  flex-direction: row;
+  border: .1em solid gray;
+  border-radius: 1em;
+  margin-bottom: 1.61em;
+}
+#imgcontainer {
+  width: 30%;
+  padding: 1em 1em;
+}
+#artistWrap img{
+  height:100%;
+  width:100%;
+  border-radius: 2em;
+}
+#infoWrap{
+  padding: 1em 1em;
+}
+#infoWrap p{
+  margin-bottom: .08em;
+}
+.bold{
+  font-weight: 800;
+  text-transform: uppercase;
+}
+#bold{
+  font-size: 2em;
+}
 
 /* MAIN */
-#someinfo{
+#top{
   background-image: url("../images/makeup.jpg");
   background-size: cover;
   background-attachment: fixed;
+}
+#someinfo{
+
   height: 30em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 #connectingyou{
   font-size: 2em;
   color: white;
   text-align: left;
-  padding: 6em 6em 4em;
+  text-shadow: .03em .03em .03em black;
+  /* background-color: black; */
+  display: inline-flex;
+  width: 70%;
 }
 main{
   padding-top: 1.61em;
+  padding-bottom: 3em;
+  color: #666666;
+
+}
+#iam{
+  color: #666666;
+  padding-left: 5em;
+  font-size: 2em;
+  font-weight: 800;
+  margin-bottom: -.2em;
+  /* display: none; */
 }
 
+
+/* Testimontial */
+#testimon{
+  height: 30em;
+  background-color: #3E3D5A;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+#testimon p{
+  color: white;
+  font-size: 1.5em;
+  padding-left: 5em ;
+  padding-right: 5em;
+}
 
 /* LOGIN CHOICE */
 #planner, #artist{
@@ -94,7 +238,7 @@ width: 100%;
 }
 
 
-
+/* Choose a user */
 
 #userchoose{
   display: flex;
@@ -115,13 +259,8 @@ width: 100%;
 }
 #description{
   width: 250px;
-  color: white;
+  color: #3E3D5A;
 }
 nav {
   background-color: pink;
-}
-#artistWrap{
-  display: flex;
-  flex-direction: row;
-  background-color: green;
 }
