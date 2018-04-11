@@ -70,10 +70,13 @@ app.get('/api/userorder', function(req, res) {
       console.error("user not found")
   } else {
     console.log('this user is found on order list' + orderlist)
+    res.json(orderlist);
 
-    db.User.find({
+    db.User.find(
+      {
       _id: orderlist.rated_vendor
-    }, function(err, order){
+    },
+    function(err, order){
       if (err) {
         console.error('error creating api');
       } else {
@@ -85,6 +88,8 @@ app.get('/api/userorder', function(req, res) {
     }
   })
 })
+
+
 
 //Create Orders
 app.post('/api/orders', function (req, res) {
@@ -108,7 +113,6 @@ app.post('/api/orders', function (req, res) {
         }
       });
     }
-
   })
 })
 
@@ -151,6 +155,13 @@ app.post('/partials/vendorsignup', function (req, res) {
     function (err, newVendor) {
       Vendor.create({
         user_id: newVendor._id
+        // username: newVendor.username,
+        // name: newVendor.name,
+        // artist: newVendor.artist,
+        // location: newVendor.location,
+        // rate: newVendor.rate,
+        // picture: newVendor.picture,
+        // email: newVendor.email,
       })
       console.log("created")
       passport.authenticate('local')(req, res, function() {
