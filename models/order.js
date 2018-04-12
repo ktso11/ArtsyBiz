@@ -13,8 +13,13 @@ var OrderSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Vendor'
     },
+  isRated: {
+      type: Boolean,
+      default: "false"
+    },
+  rateValue: ['Number'],
 
-  rateValue: ['Number']
+
 });
 
 // OrderSchema.plugin(passportLocalMongoose);
