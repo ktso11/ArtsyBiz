@@ -5,7 +5,7 @@ console.log("Sanity Check: JS is working!");
 // $('#rate').on('submit', function(e) {
 //   e.preventDefault();
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
-<p><span class="bold">I am a ${ratevendor[i].rateValue.reduce(reducer)/ratevendor[i].rateValue.length} star Artist, specialized in </span>${ratevendor[i].rated_vendor.user_id.artist}</p>
+
 
     $.ajax({
       method: 'GET',
@@ -24,12 +24,27 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
                 <p><span class="bold" id="bold">${ratevendor[i].rated_vendor.user_id.name}</span></p>
                 <p><span class="bold">Location:</span> ${ratevendor[i].rated_vendor.user_id.location}</p>
                 <p><span class="bold">Contact Me: </span>${ratevendor[i].rated_vendor.user_id.email} </p>
+                <p><span class="bold">I am a
 
-                </section>
-                <form method="PUT" class="rateV" >
-                  <input type="text" class="rateValue" name="star" value="5" >
-                  <input type="submit" class="submitreview" data-id="${ratevendor[i]._id}" value="Rate This Artsy">
+
+                ${ratevendor[i].rated_vendor.user_id.rating.reduce(reducer)/
+                  ratevendor[i].rated_vendor.user_id.rating.length}
+
+                <img src="/images/star.png" id="star"> Artist, specialized in </span>${ratevendor[i].rated_vendor.user_id.artist}</p>
+                <form method="PUT" class="rateV" id="rateit">
+                  <select class="rateValue" name="star">
+                    <option value="" disabled selected>Rate This Artist!</option>
+                    <option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+                    <option value="4">&#9733; &#9733; &#9733; &#9733;</option>
+                    <option value="3">&#9733; &#9733; &#9733;</option>
+                    <option value="2">&#9733; &#9733;</option>
+                    <option value="1">&#9733;</option>
+                  </select>
+
+                  <input type="submit" class="submitreview" data-id="${ratevendor[i]._id}" value="Rate">
               </form>
+                </section>
+
                 </div>
               </div>
             `);
@@ -88,11 +103,17 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
               <p><span class="bold">Location:</span> ${json[i].location}</p>
               <p><span class="bold">Rate: </span>${json[i].rate} per event</p>
               <p><span class="bold">Contact Me: </span>${json[i].email} </p>
-              <p><span class="bold">I am a 5 star Artist, specialized in </span>${json[i].artist}</p>
+              <p><span class="bold">I am a
+
+
+              ${json[i].rating.reduce(reducer)/
+                json[i].rating.length}
+
+              <img src="/images/star.png" id="star"> Artist, specialized in </span>${json[i].artist}</p>
               <form method="POST" id="addOrder" action="/api/orders">
-                <input type="text" id="vendor_id" name="vendor_id" value="${json[i]._id}" >
-                <input type="text" id="user_id" name="user_id" value="${user}" >
-                <input type="submit" value="Hire">
+                <input type="hidden" id="vendor_id" name="vendor_id" value="${json[i]._id}" >
+                <input type="hidden" id="user_id" name="user_id" value="${user}" >
+                <input id="rateit" type="submit" value="Hire">
             </form>
             </section>
             </div>

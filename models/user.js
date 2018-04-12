@@ -12,7 +12,10 @@ var UserSchema = new Schema({
   rate: String,
   picture: String,
   email: String,
-  rating: [Number]
+  rating: {
+    type: [Number],
+    'default':5
+  }
 
 });
 

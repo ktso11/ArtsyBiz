@@ -70,17 +70,22 @@ app.get('/api/order', function(req, res) {
 
 app.put('/api/userorder/:id', function (req, res) {
   // get book id from url params (`req.params`)
-  // console.log('books edit', req.params);
+  console.log('req.param: ' +req.params.id);
   // console.log('body is', req.body);]
   var id= req.params.id
-  var rating = req.body.rateValue;
-  // find the index of the book we want to remove
-  db.Order.findOne({_id:id},function(err,found){
-    found.rateValue.push(rating)
-    found.save(function(err,saved){
-        res.json(saved);
-    })
+  var rating = req.body.rateValue; //ref html on input
+  db.Order.findOne({_id:id}).populate({
+    path: 'rated_vendor',
+    populate: { path: 'user_id'}
   })
+  .exec(function(err,found){
+      // found.rateValue.push(rating)
+      found.rated_vendor.user_id.rating.push(rating)
+      console.log('req.body ' + req.body.rateValue)
+      found.rated_vendor.user_id.save(function(err,saved){
+          res.json(saved);
+      })
+    })
 });
 
 
