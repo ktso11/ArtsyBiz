@@ -14,7 +14,7 @@ var OrderSchema = new Schema({
         ref: 'Vendor'
     },
 
-  rateValue: []
+  rateValue: ['Number']
 });
 
 // OrderSchema.plugin(passportLocalMongoose);

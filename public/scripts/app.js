@@ -2,49 +2,65 @@
 $(document).ready(function(){
 console.log("Sanity Check: JS is working!");
 
-var user = document.getElementById('currentUser').value;
+// $('#rate').on('submit', function(e) {
+//   e.preventDefault();
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
-  $.ajax({
-    method: 'GET',
-    url: '/api/order',
-    success: function(orderlist){
-      console.log('calling api')
-      console.log(orderlist);
-      for(let i=0; i< orderlist.length; i++){
-        if(orderlist[i].rater_user === user){
-        $("#hidden_rate").append(`
-          <p> My ID ${orderlist[i].rater_user} || Vendor ID <span>${orderlist[i].rated_vendor}</span> </p>
-          `);
+    $.ajax({
+      method: 'GET',
+      url: '/api/userorder',
+      success: function(ratevendor){
+        console.log(ratevendor);
+        for(let i=0; i< ratevendor.length; i++){
+          $("#rateArtsy").append(`
+            <div id="vendorresults">
+              <div id="artistWrap">
+                <div id="imgcontainer">
+                  <img src="/images/profile.jpg" >
+                </div>
+                <section id="infoWrap">
+                <p><span class="bold" id="bold">${ratevendor[i].rated_vendor.user_id.name}</span></p>
+                <p><span class="bold">Location:</span> ${ratevendor[i].rated_vendor.user_id.location}</p>
+                <p><span class="bold">Contact Me: </span>${ratevendor[i].rated_vendor.user_id.email} </p>
+                <p><span class="bold">I am a ${ratevendor[i].rateValue.reduce(reducer)/ratevendor[i].rateValue.length} star Artist, specialized in </span>${ratevendor[i].rated_vendor.user_id.artist}</p>
+
+                </section>
+                <form method="PUT" class="rateV" >
+                  <input type="text" class="rateValue" name="star" value="5" >
+                  <input type="submit" class="submitreview" data-id="${ratevendor[i]._id}" value="Rate This Artsy">
+              </form>
+                </div>
+              </div>
+            `);
         }
+      },
+      error: function(err){
+        console.log("ERROR!", err)
       }
-    },
-    error: function(err){
-      console.log("ERROR!", err)
-    }
-  });
+    });
 
-  $('#rate').on('click', function(e) {
-    var vendors = $('.vendorID').text();
-    console.log(vendors);
+  $('#rateArtsy').on('submit','.rateV', function(e) {
+    console.log('clicked on rate button')
+    // $(this).parent().hide();
     e.preventDefault();
-      $.ajax({
-        method: 'GET',
-        url: '/api/isvendor',
-        success: function(vendor){
-          console.log(vendor);
-          for(let i=0; i< vendor.length; i++){
-            if(vender[i]._id === vendors){
-            $("#rateArtsy").append(`
-              <p>vender[i].name</p>
-              `);
+    var id=$(this).find('.submitreview').attr('data-id')
+    console.log(id);
+    var rating = $(this).find('.rateValue').val();
+    $.ajax({
+      method: "PUT",
+      url: `/api/userorder/${id}`,
+      data: { rateValue: rating },
+      success: succ,
+      error: function(err){
+              console.log("ERROR!", err)
             }
-          }
-        },
-        error: function(err){
-          console.log("ERROR!", err)
-        }
-      });
-  });
+    })
+  })
+  function succ(json) {
+    console.log('sucess!')
+    console.log(json)
+  }
+
 
 
   $('#vendorsearch').on('submit', function(e) {
@@ -60,7 +76,7 @@ var user = document.getElementById('currentUser').value;
         console.log(json);
         for(let i=0; i<json.length; i++){
           $("#vendorresults").append(`
-            <div id="artistWrap">
+            <div id="artistWrap" >
             <div id="imgcontainer">
               <img src="/images/profile.jpg" >
             </div>
@@ -105,6 +121,7 @@ var user = document.getElementById('currentUser').value;
     // newOrder.push(json);
     console.log(json)
   }
+
 
 
 
