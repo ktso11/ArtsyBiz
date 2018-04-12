@@ -113,10 +113,10 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
               <form method="POST" id="addOrder" action="/api/orders">
                 <input type="hidden" id="vendor_id" name="vendor_id" value="${json[i]._id}" >
                 <input type="hidden" id="user_id" name="user_id" value="${user}" >
-                <input id="rateit" type="submit" value="Hire">
+                <input type="submit" value="Hire">
             </form>
             </section>
-            </div>
+            </div><br>
             `);
         }
       },
