@@ -11,7 +11,8 @@ var UserSchema = new Schema({
   location: String,
   rate: String,
   picture: String,
-  email: String
+  email: String,
+  rating: [Number]
 
 });
 

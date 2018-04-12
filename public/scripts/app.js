@@ -5,6 +5,7 @@ console.log("Sanity Check: JS is working!");
 // $('#rate').on('submit', function(e) {
 //   e.preventDefault();
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
+<p><span class="bold">I am a ${ratevendor[i].rateValue.reduce(reducer)/ratevendor[i].rateValue.length} star Artist, specialized in </span>${ratevendor[i].rated_vendor.user_id.artist}</p>
 
     $.ajax({
       method: 'GET',
@@ -12,7 +13,8 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
       success: function(ratevendor){
         console.log(ratevendor);
         for(let i=0; i< ratevendor.length; i++){
-          $("#rateArtsy").append(`
+          console.log(ratevendor[0].rated_vendor.user_id.name)
+          $(".reviewme").append(`
             <div id="vendorresults">
               <div id="artistWrap">
                 <div id="imgcontainer">
@@ -22,7 +24,6 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
                 <p><span class="bold" id="bold">${ratevendor[i].rated_vendor.user_id.name}</span></p>
                 <p><span class="bold">Location:</span> ${ratevendor[i].rated_vendor.user_id.location}</p>
                 <p><span class="bold">Contact Me: </span>${ratevendor[i].rated_vendor.user_id.email} </p>
-                <p><span class="bold">I am a ${ratevendor[i].rateValue.reduce(reducer)/ratevendor[i].rateValue.length} star Artist, specialized in </span>${ratevendor[i].rated_vendor.user_id.artist}</p>
 
                 </section>
                 <form method="PUT" class="rateV" >
@@ -58,6 +59,8 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
   })
   function succ(json) {
     console.log('sucess!')
+    // $('#user_id input').val('');
+    // $('#vendor_id input').val('');
     console.log(json)
   }
 
@@ -76,7 +79,7 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
         console.log(json);
         for(let i=0; i<json.length; i++){
           $("#vendorresults").append(`
-            <div id="artistWrap" >
+            <div id="artistWrap" class="RateWrap">
             <div id="imgcontainer">
               <img src="/images/profile.jpg" >
             </div>
