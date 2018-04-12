@@ -1,9 +1,6 @@
 
 $(document).ready(function(){
 console.log("Sanity Check: JS is working!");
-
-// $('#rate').on('submit', function(e) {
-//   e.preventDefault();
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
 
@@ -18,20 +15,14 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
             <div id="vendorresults">
               <div id="artistWrap">
                 <div id="imgcontainer">
-                  <img src="/images/profile.jpg" >
+                  <img src="${ratevendor[i].rated_vendor.user_id.picture}" >
                 </div>
                 <section id="infoWrap">
                 <p><span class="bold" id="bold">${ratevendor[i].rated_vendor.user_id.name}</span></p>
                 <p><span class="bold">Location:</span> ${ratevendor[i].rated_vendor.user_id.location}</p>
                 <p><span class="bold">Contact Me: </span>${ratevendor[i].rated_vendor.user_id.email} </p>
-                <p><span class="bold">I am a
 
-
-                ${ratevendor[i].rated_vendor.user_id.rating.reduce(reducer)/
-                  ratevendor[i].rated_vendor.user_id.rating.length}
-
-                <img src="/images/star.png" id="star"> Artist, specialized in </span>${ratevendor[i].rated_vendor.user_id.artist}</p>
-                <form method="PUT" class="rateV" id="rateit">
+                <form method="POST" class="rateV" id="rateit">
                   <select class="rateValue" name="star">
                     <option value="" disabled selected>Rate This Artist!</option>
                     <option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
@@ -41,7 +32,7 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
                     <option value="1">&#9733;</option>
                   </select>
 
-                  <input type="submit" class="submitreview" data-id="${ratevendor[i]._id}" value="Rate">
+                  <input type="submit" id="disable" class="submitreview" data-id="${ratevendor[i]._id}" value="Rate">
               </form>
                 </section>
 
@@ -96,7 +87,7 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
           $("#vendorresults").append(`
             <div id="artistWrap" class="RateWrap">
             <div id="imgcontainer">
-              <img src="/images/profile.jpg" >
+              <img src="${json[i].picture}" >
             </div>
             <section id="infoWrap">
               <p><span class="bold" id="bold">${json[i].username}</span></p>

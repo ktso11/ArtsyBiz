@@ -74,25 +74,39 @@ app.put('/api/userorder/:id', function (req, res) {
   // console.log('body is', req.body);]
   var id= req.params.id
   var rating = req.body.rateValue; //ref html on input
+//   db.Order.findOne({_id: id }, function(err, order) {
+//     if (err) { console.error(err) }
+//     console.log('look here' + order.rated_vendor.user_id)
+//
+//     order.isRated = true
+//     // order.rated_vendor.user_id.rating.push(rating)
+//     order.save()
+//     res.json(order)
+//   })
+// })
+//remove
   db.Order.findOne({_id:id}).populate({
     path: 'rated_vendor',
     populate: { path: 'user_id'}
   })
   .exec(function(err,found){
-      // found.rateValue.push(rating)
-      found.rated_vendor.user_id.rating.push(rating)
-      console.log('req.body ' + req.body.rateValue)
-      found.rated_vendor.user_id.save(function(err,saved){
-          res.json(saved);
+      found.isRated = true;
+      console.log("found.isRated" + found)
+      // found.rated_vendor.user_id.rating.push(rating)
+      found.save(function(err,saved){
+        saved.rated_vendor.user_id.rating.push(rating)
+        saved.rated_vendor.user_id.save()
+        res.json(saved);
       })
     })
-});
+  })
+
 
 
 //api/user:id/orders
 // Flitering Orders
 app.get('/api/userorder/', function(req, res) {
-  db.Order.find({rater_user: req.user._id}).populate({
+  db.Order.find({rater_user: req.user._id, isRated: false}).populate({
     path: 'rated_vendor',
     // Get friends of friends - populate the 'friends' array for every friend
     populate: { path: 'user_id' }
