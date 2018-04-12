@@ -1,6 +1,9 @@
 {
   "name": "artsybiz",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.14.1"
+  },
   "description": "URL: TBD || \r Name: “ArtsyBiz\" ||\r Genre: Services/Arts",
   "main": "server.js",
   "scripts": {
