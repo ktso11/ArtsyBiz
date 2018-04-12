@@ -5,6 +5,7 @@ var express = require("express"),
     session = require('express-session'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
+    methodOverride = require('method-override')
 var db = require("./models"),
     User = db.User
     Order = db.Order
@@ -14,6 +15,7 @@ app.set("views", __dirname + '/views');    // Views directory
 app.use(express.static('public'));          // Static directory
 app.use(bodyParser.urlencoded({ extended: true })); // req.body
 app.set('view engine', 'ejs')
+app.use(methodOverride('X-HTTP-Method-Override'))
 // middleware for auth
 app.use(cookieParser());
 app.use(session({
@@ -52,6 +54,9 @@ app.get('/search', function(req, res) {
 app.get('/profile', function(req, res) {
  res.render("profile", { user: req.user });
 });
+app.get('/thanks', function(req, res) {
+ res.render("thanks", { user: req.user, });
+});
 
 
 
@@ -62,33 +67,48 @@ app.get('/api/order', function(req, res) {
   })
 })
 
+
+app.put('/api/userorder/:id', function (req, res) {
+  // get book id from url params (`req.params`)
+  // console.log('books edit', req.params);
+  // console.log('body is', req.body);]
+  var id= req.params.id
+  var rating = req.body.rateValue;
+  // find the index of the book we want to remove
+  db.Order.findOne({_id:id},function(err,found){
+    found.rateValue.push(rating)
+    found.save(function(err,saved){
+        res.json(saved);
+    })
+  })
+});
+
+
 //api/user:id/orders
-app.get('/api/userorder', function(req, res) {
-  db.Order.find({rater_user: req.user._id},
+// Flitering Orders
+app.get('/api/userorder/', function(req, res) {
+  db.Order.find({rater_user: req.user._id}).populate({
+    path: 'rated_vendor',
+    // Get friends of friends - populate the 'friends' array for every friend
+    populate: { path: 'user_id' }
+  })
+.exec(
     function(err, orderlist) {
     if (err) {
       console.error("user not found")
   } else {
-    console.log('this user is found on order list' + orderlist)
-    res.json(orderlist);
-
-    db.User.find(
-      {
-      _id: orderlist.rated_vendor
-    },
-    function(err, order){
-      if (err) {
-        console.error('error creating api');
-      } else {
-        console.log('finding vendor succss')
-        res.status(200).json(order);
-      }
-      }
-    )
-    }
+    // console.log('this user is found on order list' + orderlist)
+    res.status(200).json(orderlist);
+  }
   })
 })
-
+//testing id
+app.get('/api/userorder/:id', function (req, res) {
+  db.Order.findOne({_id: req.params.id
+  }, function(err, data) {
+    res.json(data);
+  });
+});
 
 
 //Create Orders
@@ -109,7 +129,7 @@ app.post('/api/orders', function (req, res) {
           res.status(400).json({error: err})
         } else {
           console.log(order);
-          res.status(200).json(order);
+          res.redirect('/thanks');
         }
       });
     }
@@ -117,7 +137,7 @@ app.post('/api/orders', function (req, res) {
 })
 
 //GET Vendors
-app.get('/api/vendors', function(req, res) {
+app.get('/api/vendors/:id', function(req, res) {
   db.Vendor.find().populate('')
   .exec(function(err, vendorlist) {
     if (err) { return console.log("index error: " + err); }
@@ -155,13 +175,6 @@ app.post('/partials/vendorsignup', function (req, res) {
     function (err, newVendor) {
       Vendor.create({
         user_id: newVendor._id
-        // username: newVendor.username,
-        // name: newVendor.name,
-        // artist: newVendor.artist,
-        // location: newVendor.location,
-        // rate: newVendor.rate,
-        // picture: newVendor.picture,
-        // email: newVendor.email,
       })
       console.log("created")
       passport.authenticate('local')(req, res, function() {
