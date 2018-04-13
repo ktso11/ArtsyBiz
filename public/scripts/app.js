@@ -84,6 +84,7 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
       success: function(json){
         console.log(json);
         for(let i=0; i<json.length; i++){
+          var rating = json[i].rating.reduce(reducer)/json[i].rating.length  ;
           $("#vendorresults").append(`
             <div id="artistWrap" class="RateWrap">
             <div id="imgcontainer">
@@ -92,14 +93,10 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
             <section id="infoWrap">
               <p><span class="bold" id="bold">${json[i].username}</span></p>
               <p><span class="bold">Location:</span> ${json[i].location}</p>
-              <p><span class="bold">Rate: </span>${json[i].rate} per event</p>
+              <p><span class="bold">Rate: &#36; </span>${json[i].rate} per event</p>
               <p><span class="bold">Contact Me: </span>${json[i].email} </p>
               <p><span class="bold">I am a
-
-
-              ${json[i].rating.reduce(reducer)/
-                json[i].rating.length}
-
+              `+ rating.toFixed(2)+`
               <img src="/images/star.png" id="star"> Artist, specialized in </span>${json[i].artist}</p>
               <form method="POST" id="addOrder" action="/api/orders">
                 <input type="hidden" id="vendor_id" name="vendor_id" value="${json[i]._id}" >
