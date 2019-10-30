@@ -10,6 +10,7 @@ var db = require("./models"),
     User = db.User
     Order = db.Order
     Vendor = db.Vendor
+
 // Configure app
 app.set("views", __dirname + '/views');    // Views directory
 app.use(express.static('public'));          // Static directory
