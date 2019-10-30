@@ -1,17 +1,20 @@
 <header>
 
-  <p id="logo">ArtsyBiz</p>
+  <span id="logo">ArtsyBiz</span>
   <% if(!user) { %>
-  <div id="userTrue">
+  <!-- <div id="userTrue"> -->
     <span id="loginNav">
       <a href="/userlog">Planner</a>
+    </span>
+    <span id="loginNav">
       <a href="/vendorlog">Artist</a>
     </span>
-  </div>
+
+  <!-- </div> -->
 
   <% } else { %>
 
-    <div id="userTrue">
+    <!-- <div id="userTrue"> -->
       <span id="loginNav">
         <a href="/search">Search</a>
         <a href="/profile" id="profile">Profile</a>
@@ -19,6 +22,6 @@
         <input type="hidden" id="currentUser" value="<%= user._id %>">
 
       </span>
-    </div>
+    <!-- </div> -->
   <% } %>
 </header>

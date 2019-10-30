@@ -1,0 +1,312 @@
+
+*,* :before, *:after {
+ box-sizing: border-box;
+ /* text-shadow: .01em .01em .01em black; */
+}
+body {
+  margin: 0 auto;
+  /* background-color: #DEDCB5;*/
+  /* background-color:#3E3D5A; */
+}
+
+
+p{
+color: #4C4C4C;
+}
+/* HEADER */
+header {
+  height: 5em;
+  /* background-color: #DE5E61; */
+  margin-top: 0em;
+  padding-left: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+#header2 {
+  background-color: black;
+}
+#logo{
+  font-size: 4em;
+  font-weight: 800;
+  color: white;
+  text-shadow: .03em .03em .03em black;
+}
+#loginNav{
+  display: inline-block;
+  margin-right: 1.61em;
+  margin-top: 1.61em;
+  margin-left: 1.61em;
+  text-shadow: .03em .03em .03em black;
+}
+#loginNav a{
+  border: .2em solid white;
+  border-radius: .2em;
+  color: white;
+  padding: .3em .3em;
+  font-weight: 800;
+  margin-left: .6em;
+  font-size: 1.2em;
+}
+
+h1{
+  margin-top: 0em;
+  color: white;
+  padding-top: .5em;
+  font-weight: 800;
+}
+/* title from profile page */
+#pagetitle{
+  text-align: center;
+  margin-bottom: 2em;
+  margin-top: 2em;
+  color: gray;
+}
+/* title from thank you page */
+#thanktitle{
+  text-align: center;
+  margin: 8em 2em;
+  color: gray;
+}
+/* login page*/
+.formstyle{
+  display: flex;
+  flex-direction: column;
+}
+#userlogin{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* display: flex;
+  flex-direction: column; */
+}
+.logincontainer{
+  width: 60%;
+  border-radius: .3em;
+  border: .1em solid #666666;
+  padding: 1em 1em;
+  margin: 1.61em 1.61em;
+}
+.logincontainer input{
+  width: 100%;
+  overflow: auto;
+  border: .1em solid #666666;
+  border-radius: .3em;
+  margin-bottom: .7em;
+}
+.logincontainer select{
+  width: 100%;
+  overflow: auto;
+  border: .1em solid #666666;
+  border-radius: .3em;
+  margin-bottom: .7em;
+}
+.formcontainer h2{
+  margin-bottom: 0em;
+}
+/* Query Initi */
+#vendorsearch select, #vendorsearch input{
+    width: 100%;
+    overflow: auto;
+    border: .1em solid #666666;
+    border-radius: .3em;
+    margin-bottom: .7em;
+}
+#vendorsearch{
+  width: 60%;
+  border-radius: .3em;
+  border: .1em solid #666666;
+  padding: 1em 1em;
+  margin-top: 1.61em;
+  margin-bottom: 4em;
+}
+.vendorsearch{
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+}
+.vendorsearch h3{
+  display: block;
+  margin-bottom: 0em;
+  text-align: left;
+}
+/* Query Results */
+#vendorresults{
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width:60%;
+}
+#artistWrap{
+  display: flex;
+  flex-direction: row;
+  border: .1em solid gray;
+  border-radius: 1em;
+  margin-bottom: 1.61em;
+}
+#imgcontainer {
+  width: 30%;
+  padding: 1em 1em;
+}
+#artistWrap img{
+  height:100%;
+  width:100%;
+  border-radius: 2em;
+}
+
+#infoWrap{
+  padding: 1em 1em;
+}
+#infoWrap p{
+  margin-bottom: .08em;
+}
+.bold{
+  font-weight: 800;
+  text-transform: uppercase;
+}
+#bold{
+  font-size: 2em;
+}
+#infoWrap img{
+  width:1.3em;
+  height:1.3em;
+}
+#rateit{
+  margin-top: 1em;
+}
+#rateit select, #rateit input, #addOrder input{
+  background-color: white;
+  margin-right: .5em;
+  border-radius: .2em;
+  border: .05em solid gray;
+  height: 1.5em;
+  padding-bottom: .3em;
+}
+
+/* MAIN */
+#top{
+  background-image: url("../images/makeup.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+}
+#someinfo{
+
+  height: 34em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#connectingyou{
+  font-size: 2em;
+  color: white;
+  text-align: left;
+  text-shadow: .03em .03em .03em black;
+  /* background-color: black; */
+  display: inline-flex;
+  width: 70%;
+}
+main{
+  padding-top: 5em;
+  padding-bottom: 5em;
+  color: #666666;
+
+}
+#iam{
+  color: #666666;
+  padding-left: 5em;
+  font-size: 2em;
+  font-weight: 800;
+  margin-bottom: -.2em;
+  /* display: none; */
+}
+
+
+/* Testimontial */
+#testimon{
+  height: 30em;
+  background-color: #3E3D5A;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+#testimon p{
+  color: white;
+  font-size: 1.5em;
+  padding-left: 5em ;
+  padding-right: 5em;
+}
+
+/* LOGIN CHOICE */
+#planner, #artist{
+  background-image: url("../images/planner.png");
+  background-size: 250px 220px;
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 250px;
+  border-radius: 1em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+#artist{
+  background-image: url("../images/artist.png");
+}
+
+.userLink {
+background-color: white;
+font-weight: 800;
+font-size: 1.5em;
+display: inline-block;
+width: 100%;
+}
+/* Footer */
+Footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 5em;
+  margin-bottom: 5em;
+  text-align: center;
+}
+Footer span{
+  font-weight: 800;
+  text-transform: uppercase;
+}
+Footer ul {
+  list-style-type: none;
+}
+
+/* Choose a user */
+
+#userchoose{
+  display: flex;
+  flex-direction: row;
+  /* margin: 0 auto; */
+  align-items: center;
+  justify-content: center;
+}
+#userchoose section{
+  width: 30%;
+  text-align: center;
+}
+.userVender{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+}
+#description{
+  width: 250px;
+  color: #3E3D5A;
+}
+nav {
+  background-color: pink;
+}
