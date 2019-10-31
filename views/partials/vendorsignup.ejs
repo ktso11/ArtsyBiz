@@ -1,35 +1,73 @@
 
-  <div class="formcontainer">
+  <div class="formcontainer"  id="user-signup">
+    <h3>Sign Up</h3>
+    <form method="POST" class="formstyle" action="partials/vendorsignup">
+      <div class="form-group">
+        <input type="text" name="name" class="form-control"  placeholder="Your Name">
+      </div>
+      <div class="form-group">
+        <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+      </div>
+      <div class="form-group">
+        <input type="text" name="email" class="form-control" placeholder="Email" autofocus>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" class="form-control"  placeholder="Password">
+      </div>
+      <div class="form-group">
+        <input type="hidden" name="isVendor" class="form-control" value="true"/>
+      </div>
+      <div class="form-group">
+        <input type="text" name="rate"  class="form-control" placeholder="Rate: $500 per event" autofocus>
+      </div>
+      <div class="form-group">
+        <select name="artist"  placeholder="Hairstylist">
+          <option value="" disabled selected>Select your artistry</option>
+          <option value="Make-Up">Make-Up Artist</option>
+          <option value="HairStylist">HairStylist</option>
+          <option value="DJ">DJ</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select name="location"  placeholder="Location">
+          <option value="" disabled selected>Location</option>
+          <option value="San Francisco">San Francisco CA</option>
+          <option value="Oakland">Oakland CA</option>
+        </select>
+      </div>
 
-        <h2>Sign Up</h2>
-        <br>
-        <form method="POST" class="formstyle" action="partials/vendorsignup">
-            <input type="text" name="name" placeholder="Your Name">
-            <input type="text" name="username" placeholder="Username" autofocus>
-            <input type="text" name="email" placeholder="Email" autofocus>
-            <input type="password" name="password" placeholder="Password">
-            <input type="hidden" name="isVendor" value="true"/>
-            <select name="artist" placeholder="Hairstylist">
-              <option value="" disabled selected>Select your artistry</option>
-              <option value="Make-Up">Make-Up Artist</option>
-              <option value="HairStylist">HairStylist</option>
-              <option value="DJ">DJ</option>
-            </select>
-            <select name="location" placeholder="Location">
-              <option value="" disabled selected>Location</option>
-              <option value="San Francisco">San Francisco CA</option>
-              <option value="Oakland">Oakland CA</option>
-            </select>
-            <input type="text" name="rate" placeholder="Rate: $500 per event" autofocus>
-            <select name="picture" placeholder="picture" >
-              <option value="" disabled selected>Select your photo</option>
-              <option value="https://sheltered-forest-14553.herokuapp.com/images/dj.jpg">DJ </option>
-              <option value="https://sheltered-forest-14553.herokuapp.com/images/hair.jpg">Hair Stylist </option>
-              <option value="https://sheltered-forest-14553.herokuapp.com/images/make_up.jpg">Make Up Artist </option>
-              <option value="https://sheltered-forest-14553.herokuapp.com/images/somebackground.jpg">Other </option>
-            </select>
-            <!-- <input type="text" name="picture" placeholder="picture" value="images/person.png" autofocus> -->
+      <div class="form-group">
+        <select name="picture"class="form-control-md"  placeholder="picture" >
+          <option value="" disabled selected>Select your photo</option>
+          <option value="https://sheltered-forest-14553.herokuapp.com/images/dj.jpg">DJ </option>
+          <option value="https://sheltered-forest-14553.herokuapp.com/images/hair.jpg">Hair Stylist </option>
+          <option value="https://sheltered-forest-14553.herokuapp.com/images/make_up.jpg">Make Up Artist </option>
+          <option value="https://sheltered-forest-14553.herokuapp.com/images/somebackground.jpg">Other </option>
+        </select>
+      </div>
+        <!-- <input type="text" name="picture" placeholder="picture" value="images/person.png" autofocus> -->
+      <div class="form-group">
+        <input type="submit" class="form-control button"  value="Sign Up">
+      </div>
+    </form>
+    <span>Already registered? <a href="#" id="login-link">Log in.</a></span>
+  </div>
 
-            <input type="submit"  value="Sign Up">
-        </form>
+
+
+  <div class="formcontainer" id="user-login">
+    <h3>Log In</h3>
+    <br>
+    <form method="POST" class="formstyle" action="partials/userlogin">
+      <div class="form-group">
+        <input type="text" name="username" class="form-control"  placeholder="Username" autofocus>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" class="form-control"  placeholder="Password">
+      </div>
+      <div class="form-group">
+        <input type="submit" class="form-control button"  value="Log In">
+      </div>
+    </form>
+    <span>Not a user yet? <a href="#" id="signup-link">Sign up.</a></span>
   </div>

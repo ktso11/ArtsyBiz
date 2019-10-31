@@ -43,6 +43,9 @@ app.use(function(req, res, next) {
 app.get('/', function(req, res) {
  res.render("index", { user: req.user, });
 });
+app.get('/artist', function(req, res) {
+ res.render("artist", { user: req.user, });
+});
 app.get('/userlog', function(req, res) {
  res.render("userlog", { user: req.user, });
 });
@@ -52,8 +55,8 @@ app.get('/vendorlog', function(req, res) {
 app.get('/search', function(req, res) {
  res.render("search", { user: req.user });
 });
-app.get('/profile', function(req, res) {
- res.render("profile", { user: req.user });
+app.get('/review', function(req, res) {
+ res.render("review", { user: req.user });
 });
 app.get('/thanks', function(req, res) {
  res.render("thanks", { user: req.user, });
@@ -130,7 +133,6 @@ app.get('/api/userorder/:id', function (req, res) {
   });
 });
 
-
 //Create Orders
 app.post('/api/orders', function (req, res) {
   console.log("Order request: " + req.body.user_id);
@@ -167,7 +169,6 @@ app.get('/api/vendors/:id', function(req, res) {
 
 app.get('/api/isvendor', function(req, res) {
   query = req.query.artist
-  // lquery = req.query.location
   db.User.find({isVendor: true, artist: query})
   .populate('')
   .exec(function (err, vendor) {
@@ -175,11 +176,11 @@ app.get('/api/isvendor', function(req, res) {
   });
 })
 
-
 //vendor signup
 app.get('/partials/vendorsignup', function (req, res) {
  res.render('/partials/vendorsignup');
 });
+
 app.post('/partials/vendorsignup', function (req, res) {
   User.register(new User({
     username: req.body.username,
@@ -196,7 +197,6 @@ app.post('/partials/vendorsignup', function (req, res) {
       Vendor.create({
         user_id: newVendor._id
       })
-      console.log("created")
       passport.authenticate('local')(req, res, function() {
       res.redirect('/search');;
       });
