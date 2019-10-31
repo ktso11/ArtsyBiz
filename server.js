@@ -43,6 +43,9 @@ app.use(function(req, res, next) {
 app.get('/', function(req, res) {
  res.render("index", { user: req.user, });
 });
+app.get('/artist', function(req, res) {
+ res.render("artist", { user: req.user, });
+});
 app.get('/userlog', function(req, res) {
  res.render("userlog", { user: req.user, });
 });

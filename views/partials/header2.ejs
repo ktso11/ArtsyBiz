@@ -1,27 +1,20 @@
 <header>
 
-  <span id="logo">ArtsyBiz</span>
-  <% if(!user) { %>
-  <!-- <div id="userTrue"> -->
-    <span id="loginNav">
-      <a href="/userlog">Planner</a>
-    </span>
-    <span id="loginNav">
-      <a href="/vendorlog">Artist</a>
-    </span>
+  <nav class="navbar navbar-expand-md">
+    <a class="navbar-brand" href="/"><span id="logo">ArtsyBiz</span></a>
+    <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#main-navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main-navigation">
+      <ul class="navbar-nav">
+        <li class="nav-item loginNav">
+          <a class="nav-link" href="/">Planner</a>
+        </li>
+        <li class="nav-item loginNav">
+          <a class="nav-link" href="/artist">Artist</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-  <!-- </div> -->
-
-  <% } else { %>
-
-    <!-- <div id="userTrue"> -->
-      <span id="loginNav">
-        <a href="/search">Search</a>
-        <a href="/profile" id="profile">Profile</a>
-        <a href="/logout">Log out</a>
-        <input type="hidden" id="currentUser" value="<%= user._id %>">
-
-      </span>
-    <!-- </div> -->
-  <% } %>
 </header>

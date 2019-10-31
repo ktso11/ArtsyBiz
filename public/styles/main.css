@@ -17,6 +17,7 @@
   --large-space: 2em;
   --x-large-space: 4em;
 
+  --light-purple-color: #C5B7C6;
   --white-color: #fff;
   --grey-color: #c4c4c4;
   --light-grey-color: #E0E0E0;
@@ -28,10 +29,18 @@
  box-sizing: border-box;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   margin: 0 auto;
   font-family: var(--default-font);
   font-size: var(--medium-size-font);
+  color: var(--black-color);
+  background-color: var(--white-color);
+
 }
 
 a {
@@ -43,29 +52,54 @@ a:hover {
   color: var(--brand-orange);
 }
 
+
+
 /* Header */
+
+.nav-link {
+  margin-right: 1em !important;
+}
+.nav-link:hover {
+  color: #BDBDBD;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
+
+
+
 #logo {
   font-size: var(--x-large-size-font);
   font-weight: 800;
+  letter-spacing: 0.1em;
   color: var(--brand-dark-purple);
-  margin-right: var(--large-space);
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-toggler-icon {
+  width: 2.5em;
+  height: 2.5em;
 }
 
 header {
   padding: var(--medium-margin);
-  margin-left: var(--x-large-space);
+  margin: 0;
 }
 
 header a {
   font-weight: 400;
 }
 
-#loginNav {
-  padding: var(--medium-margin);
+.loginNav {
+  /* padding: var(--medium-margin); */
   font-size: var(--large-size-font);
 }
 
-.landing-container {
+.landing-container, .landing-containerv {
   background-image: url("../images/background.png");
   background-size: auto;
   background-position: center top;
@@ -73,6 +107,10 @@ header a {
   height: 35em;
   display: flex;
   align-items: center;
+}
+
+.landing-containerv{
+  background-image: url("../images/background2.png");
 }
 
 .hero-description {
@@ -117,10 +155,54 @@ h3 {
   color: var(--white-color);
 }
 
+.landing-description{
+  display: flex;
+  flex-direction: row;
+  padding: var(--large-margin);
+}
+
+.artsy-info{
+  padding: var(--x-large-margin);
+}
+
+.artsy-info h4{
+  color: var(--brand-medium-purple);
+  font-size: 1.5em;
+}
+
+.landing-label {
+  font-size: var(--large-size-font);
+  color: var(--brand-orange);
+  font-weight: 600;
+  margin-bottom: var(--small-space);
+}
+
+.landing-icon {
+  margin-RIGHT: var(--large-space);
+  height: 7em;
+  width: 7em;
+}
+
+.landing-info-content{
+  text-align: justify;
+}
+
+/* footer */
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  padding: var(--medium-margin);
+  background-color: var(--light-purple-color);
+}
+
 @media screen and (max-width: 750px){
   .hero-description{
     display: none;
   }
+
   header {
     margin-left: var(--small-space);
   }

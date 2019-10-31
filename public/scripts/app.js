@@ -1,9 +1,21 @@
 
 $(document).ready(function(){
-console.log("Sanity Check: JS is working!");
+  const userLogin = $('#user-login');
+  const userSignup = $('#user-signup');
+
+    userLogin.hide()
+
+  $('#login-link').on('click', function(){
+    userLogin.show();
+    userSignup.hide();
+  })
+  $('#signup-link').on('click', function(){
+    userLogin.hide();
+    userSignup.show();
+  })
+
+
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-
     $.ajax({
       method: 'GET',
       url: '/api/userorder',

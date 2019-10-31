@@ -1,22 +1,38 @@
 
-  <div class="formcontainer">
+<div class="formcontainer" id="user-signup">
+  <h3>Sign up</h3>
+  <span>To start looking for artists</span>
+  <form method="POST" class="formstyle" action="partials/usersignup">
+    <div class="form-group">
+      <input type="text" name="name" class="form-control" placeholder="Your Name">
+    </div>
+    <div class="form-group">
+      <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
+    </div>
+    <div class="form-group">
+      <input type="password" name="password" class="form-control" placeholder="Password">
+    </div>
+    <div class="form-group">
+      <input type="submit" class="form-control button" value="Sign Up">
+    </div>
+  </form>
+  <span>Already a user? <a href="#" id="login-link">Log in.</a></span>
+</div>
 
-        <h3>Sign up</h3>
-        <span>To start looking for artists</span>
-        <form method="POST" class="formstyle" action="partials/usersignup">
-          <div class="form-group">
-            <input type="text" name="name" class="form-control" placeholder="Your Name">
-          </div>
-          <div class="form-group">
-            <input type="text" name="username" class="form-control" placeholder="Username" autofocus>
-          </div>
-          <div class="form-group">
-            <input type="password" name="password" class="form-control" placeholder="Password">
-          </div>
-          <div class="form-group">
-            <input type="submit" class="form-control button" value="Sign Up">
-          </div>
-        </form>
-        <span>Already a user? <a href="">Log in</a></span>
 
-  </div>
+<div class="formcontainer" id="user-login">
+  <h3>Log In</h3>
+  <br>
+  <form method="POST" class="formstyle" action="partials/userlogin">
+    <div class="form-group">
+      <input type="text" name="username" class="form-control"  placeholder="Username" autofocus>
+    </div>
+    <div class="form-group">
+      <input type="password" name="password" class="form-control"  placeholder="Password">
+    </div>
+    <div class="form-group">
+      <input type="submit" class="form-control button"  value="Log In">
+    </div>
+  </form>
+  <span>Not a user yet? <a href="#" id="signup-link">Sign up.</a></span>
+</div>
