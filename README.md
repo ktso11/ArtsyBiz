@@ -1,7 +1,7 @@
 Updated Oct 31, 2019
 
 # ArtsyBiz
-New URL: https://dark-crypt-62855.herokuapp.com/
+New Version URL (updated 10/19): https://dark-crypt-62855.herokuapp.com/
 
 OLD URL: https://sheltered-forest-14553.herokuapp.com/
 
