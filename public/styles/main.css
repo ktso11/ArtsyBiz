@@ -9,6 +9,7 @@
   --large-size-font: 1.125em;
   --x-large-size-font: 2em; /* 18px */
   --small-margin: .5em .5em;
+  --x-small-margin: .25em .5em; /*for buttons*/
   --medium-margin: 1em 1em;
   --large-margin: 2em 2em;
   --x-large-margin: 4em 4em;
@@ -52,22 +53,15 @@ a:hover {
   color: var(--brand-orange);
 }
 
-
-
 /* Header */
 
 .nav-link {
   margin-right: 1em !important;
 }
-.nav-link:hover {
-  color: #BDBDBD;
-}
 
 .navbar-collapse {
   justify-content: flex-end;
 }
-
-
 
 #logo {
   font-size: var(--x-large-size-font);
@@ -95,7 +89,6 @@ header a {
 }
 
 .loginNav {
-  /* padding: var(--medium-margin); */
   font-size: var(--large-size-font);
 }
 
@@ -187,6 +180,69 @@ h3 {
   text-align: justify;
 }
 
+.vendorsearch {
+    display: flex;
+    flex-direction: column;
+    margin: 3em auto;
+    width: 40em;
+}
+
+.form-control {
+    font-size: 1em;
+}
+
+/* Search List */
+.artistWrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: .125em solid var(--light-purple-color);
+  /* margin: var(--small-margin); */
+  border-radius: var(--small-space);
+  padding-top: var(--small-space);
+  padding-bottom: var(--small-space);
+}
+
+#vendorresults, #rateresults, #pagetitle{
+  width: 40em;
+}
+
+#pagetitle {
+  margin: var(--large-margin);
+}
+
+#star {
+  height: 1em;
+  width: auto;
+}
+
+.artist-img {
+  border-radius: var(--small-space);
+  height: 5em;
+}
+
+.artist-img-container {
+  text-align: right;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.hire-btn{
+  padding: var(--x-small-margin);
+  border-radius: var(--medium-space);
+}
+
+.rateV{
+  display: flex;
+  flex-direction: row;
+}
+
+.rateValue {
+  margin-right: var(--small-space);
+}
+
 /* footer */
 footer {
   position: absolute;
@@ -199,8 +255,21 @@ footer {
 }
 
 @media screen and (max-width: 750px){
+
+  .artist-img-container{
+    display: none;
+  }
+
+  .artistWrap {
+    border: none;
+  }
+
   .hero-description{
     display: none;
+  }
+
+  .vendorsearch {
+      width: 90%;
   }
 
   header {
@@ -209,5 +278,16 @@ footer {
 
   #logo {
     margin-right: var(--small-space);
+  }
+}
+
+@media screen and (max-width: 575px){
+  .rateValue {
+    width: 65%;
+  }
+}
+@media screen and (max-width: 475px){
+  .rateValue {
+    width: 45%;
   }
 }
