@@ -17,7 +17,6 @@
   --medium-space: 1em;
   --large-space: 2em;
   --x-large-space: 4em;
-
   --light-purple-color: #C5B7C6;
   --white-color: #fff;
   --grey-color: #c4c4c4;
@@ -36,12 +35,12 @@ html {
 }
 
 body {
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  margin-bottom: 6em;
   font-family: var(--default-font);
   font-size: var(--medium-size-font);
   color: var(--black-color);
   background-color: var(--white-color);
-
 }
 
 a {
@@ -54,7 +53,6 @@ a:hover {
 }
 
 /* Header */
-
 .nav-link {
   margin-right: 1em !important;
 }
@@ -197,7 +195,6 @@ h3 {
   flex-direction: row;
   justify-content: center;
   border: .125em solid var(--light-purple-color);
-  /* margin: var(--small-margin); */
   border-radius: var(--small-space);
   padding-top: var(--small-space);
   padding-bottom: var(--small-space);
