@@ -2,10 +2,10 @@
 $(document).ready(function(){
   const userLogin = $('#user-login');
   const userSignup = $('#user-signup');
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  const reducer = (accumulator, currentValue) => accumulator + currentValue; // use to calculate rating. expected 1+2+3 === 6
 
+// Login view toggle
   userLogin.hide();
-
   $('#login-link').on('click', function(){
     userLogin.show();
     userSignup.hide();
@@ -25,7 +25,6 @@ $(document).ready(function(){
         $(".reviewme").append(`<center>You have no artist to review at this time<br> You can review artist you've hired. </center>`);
       } else {
         for(let i=0; i< ratevendor.length; i++){
-          console.log(ratevendor[0].rated_vendor.user_id.name)
           $(".reviewme").append(`
              <div id="rateresults" class="container">
               <div class="artistWrap row">
@@ -62,7 +61,6 @@ $(document).ready(function(){
 
 // Review a vendor
   $('#rateArtsy').on('submit','.rateV', function(e) {
-    console.log('clicked on rate button')
     e.preventDefault();
     $(this).parents('#rateresults').hide();
     let id = $(this).find('.submitreview').attr('data-id')
@@ -87,6 +85,7 @@ $(document).ready(function(){
     console.log(json)
   };
 
+//Show artist based on type and add and round rating
   $('#vendorsearch').on('submit', function(e) {
     e.preventDefault();
     $('#vendorresults').empty()
@@ -97,7 +96,6 @@ $(document).ready(function(){
       method: 'GET',
       url: '/api/isvendor?artist='+artist,
       success: function(json){
-        console.log(json);
         for(let i=0; i<json.length; i++){
           let rating = json[i].rating.reduce(reducer)/json[i].rating.length  ;
           $("#vendorresults").append(`
@@ -138,21 +136,5 @@ $(document).ready(function(){
     });
   });
 
-  $('addOrder').on('submit', function(e) {
-      e.preventDefault();
-      $.ajax({
-        method: 'POST',
-        url: '/api/orders',
-        data: $(this).serializeArray(),
-        success: newOrderSuccess,
-        error: function(err){
-          console.log("ERROR!", err)
-        }
-      })
-  })
-
-  function newOrderSuccess(json) {
-    console.log(json)
-  }
 
 })
