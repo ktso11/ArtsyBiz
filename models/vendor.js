@@ -7,11 +7,7 @@ var VendorSchema = new Schema({
           type: mongoose.Schema.Types.ObjectId,
           ref: 'User'
         }
-
-
 });
-
-
 
 var Vendor = mongoose.model('Vendor', VendorSchema);
 module.exports = Vendor;

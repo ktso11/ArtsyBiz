@@ -1,4 +1,4 @@
-Updated Oct 31, 2019
+
 
 # ArtsyBiz
 New Version URL (updated 10/19): https://dark-crypt-62855.herokuapp.com/
@@ -10,6 +10,24 @@ Name: “ArtsyBiz"
 Genre: Services/Arts
 
 By: Katie So
+
+# Updated Oct 31, 2019
+Removed unused logic
+CSS variable
+HTML5 semantics
+Responsive with media query
+UI refresh with more white space
+Separated planner and artist login
+2 landing page for planner and artist
+
+#Next Step
+Angular frontend
+Form validation (sign up, rate artist, hire artist)
+404 page
+Vendor edit Profile
+Move routes and controller logic out of server.js
+Chat between planner and artist (maybe)
+
 
 ## Audience & Userstories:
 1. Project Planners/Wedding Planners on a budget seeking amateur talents or just looking for local vendors.

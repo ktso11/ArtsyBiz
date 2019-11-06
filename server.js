@@ -1,12 +1,13 @@
-var express = require("express"),
+const express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
     passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
     methodOverride = require('method-override')
-var db = require("./models"),
+
+const db = require("./models"),
     User = db.User
     Order = db.Order
     Vendor = db.Vendor
@@ -61,34 +62,25 @@ app.get('/review', function(req, res) {
 app.get('/thanks', function(req, res) {
  res.render("thanks", { user: req.user, });
 });
+app.get('/partials/vendorsignup', function (req, res) {
+ res.render('/partials/vendorsignup');
+});
+app.get('/partials/usersignup', function (req, res) {
+ res.render('/partials/usersignup');
+});
+app.get('/partials/userlogin', function (req, res) {
+ res.render('/partials/userlogin');
+});
+app.post('/partials/userlogin', passport.authenticate('local'), function (req, res) {
+  res.redirect('/search');
+});
 
 
-
-app.get('/api/order', function(req, res) {
-  db.Order.find({}, function(err, order) {
-    if (err) { cosole.error("Order not found")}
-    res.json(order)
-  })
-})
-
-
+//Not working at the moment, currently rating is done on the app.js
 app.put('/api/userorder/:id', function (req, res) {
-  // get book id from url params (`req.params`)
   console.log('req.param: ' +req.params.id);
-  // console.log('body is', req.body);]
   var id= req.params.id
   var rating = req.body.rateValue; //ref html on input
-//   db.Order.findOne({_id: id }, function(err, order) {
-//     if (err) { console.error(err) }
-//     console.log('look here' + order.rated_vendor.user_id)
-//
-//     order.isRated = true
-//     // order.rated_vendor.user_id.rating.push(rating)
-//     order.save()
-//     res.json(order)
-//   })
-// })
-//remove
   db.Order.findOne({_id:id}).populate({
     path: 'rated_vendor',
     populate: { path: 'user_id'}
@@ -96,7 +88,6 @@ app.put('/api/userorder/:id', function (req, res) {
   .exec(function(err,found){
       found.isRated = true;
       console.log("found.isRated" + found)
-      // found.rated_vendor.user_id.rating.push(rating)
       found.save(function(err,saved){
         saved.rated_vendor.user_id.rating.push(rating)
         saved.rated_vendor.user_id.save()
@@ -105,27 +96,39 @@ app.put('/api/userorder/:id', function (req, res) {
     })
   })
 
+// API
+//Get all orders
+app.get('/api/order', function(req, res) {
+  db.Order.find({}, function(err, order) {
+    if (err) { cosole.error("Order not found")}
+    res.json(order)
+  })
+})
+//Get all users
+app.get('/api/users', function(req, res) {
+  db.User.find({}, function(err, users) {
+    if (err) { cosole.error("Order not found")}
+    res.json(users)
+  })
+})
 
-
-//api/user:id/orders
-// Flitering Orders
+//Get current user's rating
 app.get('/api/userorder/', function(req, res) {
   db.Order.find({rater_user: req.user._id, isRated: false}).populate({
     path: 'rated_vendor',
-    // Get friends of friends - populate the 'friends' array for every friend
     populate: { path: 'user_id' }
   })
 .exec(
     function(err, orderlist) {
     if (err) {
-      console.error("user not found")
-  } else {
-    // console.log('this user is found on order list' + orderlist)
-    res.status(200).json(orderlist);
-  }
-  })
-})
-//testing id
+        console.error("user not found")
+    } else {
+      res.status(200).json(orderlist);
+    }
+  });
+});
+
+//Get order id
 app.get('/api/userorder/:id', function (req, res) {
   db.Order.findOne({_id: req.params.id
   }, function(err, data) {
@@ -138,9 +141,11 @@ app.post('/api/orders', function (req, res) {
   console.log("Order request: " + req.body.user_id);
   db.Vendor.findOne({user_id: req.body.vendor_id}, function(err, userfound){
     if (err){
-      console.error('not a real user!')
+      //Error Handling if there are no user
+      console.error('Not a real user!')
       res.status(400).json({error: "User not found."})
     } else {
+      //if user exist, create new order
       console.log('Found user:' + userfound)
       db.Order.create({
         rater_user: req.body.user_id,
@@ -158,29 +163,17 @@ app.post('/api/orders', function (req, res) {
   })
 })
 
-//GET Vendors
-app.get('/api/vendors/:id', function(req, res) {
-  db.Vendor.find().populate('')
-  .exec(function(err, vendorlist) {
-    if (err) { return console.log("index error: " + err); }
-    res.json(vendorlist);
-  });
-})
-
+//Searchable by artist
 app.get('/api/isvendor', function(req, res) {
   query = req.query.artist
   db.User.find({isVendor: true, artist: query})
   .populate('')
   .exec(function (err, vendor) {
       res.json(vendor);
-  });
-})
-
-//vendor signup
-app.get('/partials/vendorsignup', function (req, res) {
- res.render('/partials/vendorsignup');
+  })
 });
 
+//Vendor signup
 app.post('/partials/vendorsignup', function (req, res) {
   User.register(new User({
     username: req.body.username,
@@ -205,10 +198,6 @@ app.post('/partials/vendorsignup', function (req, res) {
 });
 
 //user signup
-app.get('/partials/usersignup', function (req, res) {
- res.render('/partials/usersignup');
-});
-
 app.post('/partials/usersignup', function (req, res) {
   User.register(new User({ username: req.body.username, name: req.body.name }), req.body.password,
     function (err, newUser) {
@@ -217,15 +206,6 @@ app.post('/partials/usersignup', function (req, res) {
       });
     }
   );
-});
-
-app.get('/partials/userlogin', function (req, res) {
- res.render('/partials/userlogin');
-});
-
-app.post('/partials/userlogin', passport.authenticate('local'), function (req, res) {
-  console.log(req.user);
-  res.redirect('/search');
 });
 
 app.get('/logout', function (req, res) {

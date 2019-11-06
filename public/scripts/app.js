@@ -4,63 +4,63 @@ $(document).ready(function(){
   const userSignup = $('#user-signup');
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
-  userLogin.hide()
+  userLogin.hide();
 
   $('#login-link').on('click', function(){
     userLogin.show();
     userSignup.hide();
-  })
+  });
   $('#signup-link').on('click', function(){
     userLogin.hide();
     userSignup.show();
-  })
+  });
 
-
-    $.ajax({
-      method: 'GET',
-      url: '/api/userorder',
-      success: function(ratevendor){
-        console.log("artist to rate" +ratevendor);
-
-        if (ratevendor === undefined || ratevendor.length == 0) {
-          $(".reviewme").append(`<center>You have no artist to review at this time<br> You can review artist you've hired. </center>`);
-        } else {
-          for(let i=0; i< ratevendor.length; i++){
-            console.log(ratevendor[0].rated_vendor.user_id.name)
-            $(".reviewme").append(`
-               <div id="rateresults" class="container">
-                <div class="artistWrap row">
-                  <div class="artist-img-container col-sm-2">
-                    <img class="artist-img" src="${ratevendor[i].rated_vendor.user_id.picture}" >
-                  </div>
-                  <section id="infoWrap" class="col-lg-10">
-                    <p><span class="bold" id="bold">${ratevendor[i].rated_vendor.user_id.name}</span></p>
-                    <p><span class="bold">Location:</span> ${ratevendor[i].rated_vendor.user_id.location}</p>
-                    <p><span class="bold">Contact Me: </span>${ratevendor[i].rated_vendor.user_id.email} </p>
-                    <form method="POST" class="rateV formcontainer" id="rateit">
-                      <select class="rateValue form-control" name="star">
-                        <option value="" disabled selected>Rate This Artist!</option>
-                        <option value="5">&#9733; &#9733; &#9733; &#9733; &#9733; </option>
-                        <option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-                        <option value="3">&#9733; &#9733; &#9733;</option>
-                        <option value="2">&#9733; &#9733;</option>
-                        <option value="1">&#9733;</option>
-                      </select>
-                      <input type="submit" id="${ratevendor[i].rated_vendor.user_id.name}" class="submitreview button hire-btn" data-id="${ratevendor[i]._id}" value="Rate">
-                    </form>
-                  </section>
-                  </div>
+//Show all the vendors to rate
+  $.ajax({
+    method: 'GET',
+    url: '/api/userorder',
+    success: function(ratevendor){
+      //if there are no vendors to rate
+      if (ratevendor === undefined || ratevendor.length == 0) {
+        $(".reviewme").append(`<center>You have no artist to review at this time<br> You can review artist you've hired. </center>`);
+      } else {
+        for(let i=0; i< ratevendor.length; i++){
+          console.log(ratevendor[0].rated_vendor.user_id.name)
+          $(".reviewme").append(`
+             <div id="rateresults" class="container">
+              <div class="artistWrap row">
+                <div class="artist-img-container col-sm-2">
+                  <img class="artist-img" src="${ratevendor[i].rated_vendor.user_id.picture}" >
                 </div>
-                <br>
-              `);
-            }
+                <section id="infoWrap" class="col-lg-10">
+                  <p><span class="bold" id="bold">${ratevendor[i].rated_vendor.user_id.name}</span></p>
+                  <p><span class="bold">Location:</span> ${ratevendor[i].rated_vendor.user_id.location}</p>
+                  <p><span class="bold">Contact Me: </span>${ratevendor[i].rated_vendor.user_id.email} </p>
+                  <form method="POST" class="rateV formcontainer" id="rateit">
+                    <select class="rateValue form-control" name="star">
+                      <option value="" disabled selected>Rate This Artist!</option>
+                      <option value="5">&#9733; &#9733; &#9733; &#9733; &#9733; </option>
+                      <option value="4">&#9733; &#9733; &#9733; &#9733;</option>
+                      <option value="3">&#9733; &#9733; &#9733;</option>
+                      <option value="2">&#9733; &#9733;</option>
+                      <option value="1">&#9733;</option>
+                    </select>
+                    <input type="submit" id="${ratevendor[i].rated_vendor.user_id.name}" class="submitreview button hire-btn" data-id="${ratevendor[i]._id}" value="Rate">
+                  </form>
+                </section>
+                </div>
+              </div>
+              <br>
+            `);
           }
-        },
-      error: function(err){
-        console.log("ERROR!", err)
-      }
-    });
+        }
+      },
+    error: function(err){
+      console.log("ERROR!", err)
+    }
+  });
 
+// Review a vendor
   $('#rateArtsy').on('submit','.rateV', function(e) {
     console.log('clicked on rate button')
     e.preventDefault();
@@ -75,16 +75,17 @@ $(document).ready(function(){
       url: `/api/userorder/${id}`,
       data: { rateValue: rating },
       success: succ,
-      error: function(err){
+      error: function(err) {
               console.log("ERROR!", err)
             }
-          })
-    })
+      })
+    });
 
+//show the rating (sanity check)
   function succ(json) {
     console.log('sucess!')
     console.log(json)
-  }
+  };
 
   $('#vendorsearch').on('submit', function(e) {
     e.preventDefault();

@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    // passportLocalMongoose = require('passport-local-mongoose');
     User = require('./user')
     Vendor = require('./vendor')
 
@@ -18,11 +17,7 @@ var OrderSchema = new Schema({
       default: "false"
     },
   rateValue: ['Number'],
-
-
 });
-
-// OrderSchema.plugin(passportLocalMongoose);
 
 var Order = mongoose.model('Order', OrderSchema);
 module.exports = Order;
