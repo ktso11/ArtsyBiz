@@ -12,21 +12,22 @@ Genre: Services/Arts
 By: Katie So
 
 # Updated Oct 31, 2019
-Removed unused logic
-CSS variable
-HTML5 semantics
-Responsive with media query
-UI refresh with more white space
-Separated planner and artist login
-2 landing page for planner and artist
+* Removed unused logic
+* CSS variable
+* HTML5 semantics
+* Responsive with media query
+* UI refresh with more white space
+* Separated planner and artist login
+* 2 landing page for planner and artist
 
 #Next Step
-Angular frontend
-Form validation (sign up, rate artist, hire artist)
-404 page
-Vendor edit Profile
-Move routes and controller logic out of server.js
-Chat between planner and artist (maybe)
+* Angular frontend
+* Form validation (sign up, rate artist, hire artist)
+* 404 page
+* Vendor login
+* Vendor edit profile
+* Move routes and controller logic out of server.js
+* Chat between planner and artist (maybe)
 
 
 ## Audience & Userstories:
@@ -54,7 +55,7 @@ Rating
 
 Validation
 
-## Wireframes
+## Wireframes 
 
 <img src="https://github.com/ktso11/ArtsyBiz/blob/master/wireframe/1.jpg" width="300" height="375"/>
 
